@@ -36,7 +36,7 @@ export function getPluginsList(
       resolvers: [ElementPlusResolver()],
       // 自动导入 Vue 3 API
       imports: ["vue", "vue-router", "@vueuse/core"],
-      dts: "src/auto-imports.d.ts", // 生成自动导入类型声明文件
+      dts: "types/auto-imports.d.ts", // 生成自动导入类型声明文件
       eslintrc: {
         enabled: true, // 生成用于 ESLint 的配置文件
         filepath: "./.eslintrc-auto-import.json",
@@ -52,7 +52,7 @@ export function getPluginsList(
         PlusProComponentsResolver(),
         VueUseComponentsResolver()
       ],
-      dts: "src/components.d.ts" // 生成组件类型声明文件
+      dts: "types/components.d.ts" // 生成组件类型声明文件
     }),
     VueI18nPlugin({
       jitCompilation: false,
