@@ -15,6 +15,13 @@ import { themePreprocessorPlugin } from "@pureadmin/theme";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import { genScssMultipleScopeVars } from "../src/layout/theme";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import {
+  ElementPlusResolver,
+  VueUseComponentsResolver
+} from "unplugin-vue-components/resolvers";
+import { PlusProComponentsResolver } from "@plus-pro-components/resolver";
 
 export function getPluginsList(
   VITE_CDN: boolean,
@@ -25,6 +32,28 @@ export function getPluginsList(
     vue(),
     // jsx、tsx语法支持
     vueJsx(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+      // 自动导入 Vue 3 API
+      imports: ["vue", "vue-router", "@vueuse/core"],
+      dts: "src/auto-imports.d.ts", // 生成自动导入类型声明文件
+      eslintrc: {
+        enabled: true, // 生成用于 ESLint 的配置文件
+        filepath: "./.eslintrc-auto-import.json",
+        globalsPropValue: true
+      }
+    }),
+    Components({
+      dirs: [], // 本地组件不扫描
+      //include: [/\.vue$/, /\.vue\?vue/], // 仅匹配 .vue 文件
+      //exclude: [/src\/components\/.*/], // 排除自定义组件路径
+      resolvers: [
+        ElementPlusResolver(),
+        PlusProComponentsResolver(),
+        VueUseComponentsResolver()
+      ],
+      dts: "src/components.d.ts" // 生成组件类型声明文件
+    }),
     VueI18nPlugin({
       jitCompilation: false,
       include: [pathResolve("../locales/**")]
