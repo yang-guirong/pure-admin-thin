@@ -10,5 +10,9 @@ addIcon("ep:home-filled", HomeFilled);
 // @iconify-icons/ri
 import Search from "@iconify-icons/ri/search-line";
 import InformationLine from "@iconify-icons/ri/information-line";
+import Database2Line from "@iconify-icons/ri/database-2-line";
+import CodeBoxLine from "@iconify-icons/ri/code-box-line";
 addIcon("ri:search-line", Search);
 addIcon("ri:information-line", InformationLine);
+addIcon("ri:database-2-line", Database2Line);
+addIcon("ri:code-box-line", CodeBoxLine);

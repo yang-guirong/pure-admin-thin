@@ -13,6 +13,7 @@ import { stringify } from "qs";
 import NProgress from "../progress";
 import { getToken, formatToken } from "@/utils/auth";
 import { useUserStoreHook } from "@/store/modules/user";
+import { ElMessage } from "element-plus";
 
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {
@@ -42,7 +43,21 @@ class PureHttp {
   private static isRefreshing = false;
 
   /** 初始化配置对象 */
-  private static initConfig: PureHttpRequestConfig = {};
+  private static initConfig: PureHttpRequestConfig = {
+    beforeRequestCallback: undefined,
+    beforeResponseCallback: (response: PureHttpResponse) => {
+      const { code, message } = response.data satisfies ApiResult<any>;
+      if (code !== 200) {
+        console.log(
+          "请求失败",
+          response.request?.responseURL,
+          response.statusText,
+          response.data
+        );
+        ElMessage.error(message);
+      }
+    }
+  };
 
   /** 保存当前`Axios`实例对象 */
   private static axiosInstance: AxiosInstance = Axios.create(defaultConfig);

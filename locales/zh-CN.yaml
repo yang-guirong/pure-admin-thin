@@ -72,6 +72,9 @@ menus:
   purePermissionButton: 按钮权限
   purePermissionButtonRouter: 路由返回按钮权限
   purePermissionButtonLogin: 登录接口返回按钮权限
+  codeGenerator: 代码生成
+  DatasourcePage: 数据源管理
+  CodeTemplatePage: 模板管理
 status:
   pureLoad: 加载中...
   pureMessage: 消息

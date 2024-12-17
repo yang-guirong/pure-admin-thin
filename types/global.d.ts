@@ -190,4 +190,10 @@ declare global {
       touched?: boolean;
     };
   }
+
+  interface ApiResult<T = any> {
+    code: number;
+    data: T;
+    message: string;
+  }
 }

@@ -55,6 +55,35 @@ const permissionRouter = {
   ]
 };
 
+const datasourceRouter = {
+  path: "/code-generator",
+  meta: {
+    title: "menus.codeGenerator",
+    icon: "ri:code-box-line",
+    rank: 11
+  },
+  children: [
+    {
+      path: "/code-generator/datasource/index",
+      name: "DatasourcePage",
+      meta: {
+        icon: "ri:database-2-line",
+        title: "menus.DatasourcePage",
+        roles: ["admin", "common"]
+      }
+    },
+    {
+      path: "/code-generator/template/index",
+      name: "CodeTemplatePage",
+      meta: {
+        icon: "ri:article-line",
+        title: "menus.CodeTemplatePage",
+        roles: ["admin", "common"]
+      }
+    }
+  ]
+};
+
 export default defineFakeRoute([
   {
     url: "/get-async-routes",
@@ -62,7 +91,7 @@ export default defineFakeRoute([
     response: () => {
       return {
         success: true,
-        data: [permissionRouter]
+        data: [permissionRouter, datasourceRouter]
       };
     }
   }

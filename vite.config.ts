@@ -24,7 +24,46 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
       port: VITE_PORT,
       host: "0.0.0.0",
       // 本地跨域代理 https://cn.vitejs.dev/config/server-options.html#server-proxy
-      proxy: {},
+      proxy: {
+        // 字符串简写写法：
+        // http://localhost:5173/foo
+        // -> http://localhost:4567/foo
+        // "/api": "http://localhost:8088/"
+        // 带选项写法：
+        // http://localhost:5173/api/bar
+        // -> http://jsonplaceholder.typicode.com/bar
+        "/api": {
+          target: "http://localhost:8088",
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/api/, "")
+        }
+        // 正则表达式写法：
+        // http://localhost:5173/fallback/
+        // -> http://jsonplaceholder.typicode.com/
+        // "^/fallback/.*": {
+        //   target: "http://jsonplaceholder.typicode.com",
+        //   changeOrigin: true,
+        //   rewrite: path => path.replace(/^\/fallback/, "")
+        // },
+        // 使用 proxy 实例
+        // "/api": {
+        //   target: "http://jsonplaceholder.typicode.com",
+        //   changeOrigin: true,
+        //   configure: (proxy, options) => {
+        //     // proxy 是 'http-proxy' 的实例
+        //   }
+        // },
+        // 代理 websockets 或 socket.io 写法：
+        // ws://localhost:5173/socket.io
+        // -> ws://localhost:5174/socket.io
+        // 在使用 `rewriteWsOrigin` 时要特别谨慎，因为这可能会让
+        // 代理服务器暴露在 CSRF 攻击之下
+        // "/socket.io": {
+        //   target: "ws://localhost:5174",
+        //   ws: true,
+        //   rewriteWsOrigin: true
+        // }
+      },
       // 预热文件以提前转换和缓存结果，降低启动期间的初始页面加载时长并防止转换瀑布
       warmup: {
         clientFiles: ["./index.html", "./src/{views,components}/*"]

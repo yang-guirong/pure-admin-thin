@@ -14,7 +14,6 @@ import removeConsole from "vite-plugin-remove-console";
 import { themePreprocessorPlugin } from "@pureadmin/theme";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import { genScssMultipleScopeVars } from "../src/layout/theme";
-import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import {
@@ -78,12 +77,12 @@ export function getPluginsList(
      */
     removeNoMatch(),
     // mock支持
-    vitePluginFakeServer({
+    /*vitePluginFakeServer({
       logger: false,
       include: "mock",
       infixName: false,
       enableProd: true
-    }),
+    }),*/
     // 自定义主题
     themePreprocessorPlugin({
       scss: {

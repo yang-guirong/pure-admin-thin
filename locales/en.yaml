@@ -72,6 +72,9 @@ menus:
   purePermissionButton: Button Permission
   purePermissionButtonRouter: Route return button permission
   purePermissionButtonLogin: Login interface return button permission
+  codeGenerator: Code Generator
+  DatasourcePage: Datasource Page
+  CodeTemplatePage: Template Page
 status:
   pureLoad: Loading...
   pureMessage: Message
