@@ -14,6 +14,7 @@ import NProgress from "../progress";
 import { getToken, formatToken } from "@/utils/auth";
 import { useUserStoreHook } from "@/store/modules/user";
 import { ElMessage } from "element-plus";
+import { storageLocal } from "@pureadmin/utils";
 
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {
@@ -44,7 +45,13 @@ class PureHttp {
 
   /** 初始化配置对象 */
   private static initConfig: PureHttpRequestConfig = {
-    beforeRequestCallback: undefined,
+    beforeRequestCallback: (config: PureHttpRequestConfig) => {
+      config.headers["Accept-Language"] =
+        storageLocal().getItem<StorageConfigs>("responsive-locale")?.locale ===
+        "zh"
+          ? "zh-CN"
+          : "en-US";
+    },
     beforeResponseCallback: (response: PureHttpResponse) => {
       const { code, message } = response.data satisfies ApiResult<any>;
       if (code !== 200) {
