@@ -75,6 +75,7 @@ menus:
   codeGenerator: 代码生成
   DatasourcePage: 数据源管理
   CodeTemplatePage: 模板管理
+  TypeMappingPage: 类型映射
 status:
   pureLoad: 加载中...
   pureMessage: 消息

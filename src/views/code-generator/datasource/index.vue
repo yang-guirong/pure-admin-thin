@@ -21,6 +21,13 @@
           }
         }"
         has-index-column
+        :pagination="{
+          total: tableDataTotalRow,
+          modelValue: pageInfo,
+          pageSizeList: [10, 20, 50],
+          align: 'right'
+        }"
+        @paginationChange="handlePaginationChange"
       >
         <template #toolbar>
           <el-tooltip effect="dark" content="新增" placement="top">
@@ -71,10 +78,13 @@
 import {
   PlusColumn,
   ButtonsCallBackParams,
-  FieldValues
+  FieldValues,
+  PageInfo
 } from "plus-pro-components";
 import { useTable } from "plus-pro-components";
-import datasourceApi, { DatasourceInfo } from "@/api/code-generator/datasource";
+import datasourceApi, {
+  DatasourceInfo as TableRow
+} from "@/api/code-generator/datasource";
 import { ElMessage } from "element-plus";
 import { CirclePlus } from "@element-plus/icons-vue";
 import { transformI18n } from "@/plugins/i18n";
@@ -82,8 +92,6 @@ import { transformI18n } from "@/plugins/i18n";
 defineOptions({
   name: "DatasourcePage"
 });
-
-type TableRow = DatasourceInfo;
 
 // 搜索表单绑定参数
 const searchFormData: Ref<FieldValues> = ref({});
@@ -114,7 +122,7 @@ const searchFormColumns: PlusColumn[] = [
   },
   {
     label: "HOST",
-    prop: "host",
+    prop: "dbHost",
     tooltip: "域名或ip"
   },
   {
@@ -136,8 +144,18 @@ const handleSearchFormReset = () => {
   console.log("handleSearchFormReset");
   getTableDataList();
 };
+// 分页改变
+const handlePaginationChange = (_pageInfo: PageInfo) => {
+  pageInfo.value = _pageInfo;
+  getTableDataList();
+};
 
-const { tableData, buttons } = useTable<TableRow[]>();
+const {
+  tableData,
+  buttons,
+  pageInfo,
+  total: tableDataTotalRow
+} = useTable<TableRow[]>();
 // 表格操作列按钮
 buttons.value = [
   {
@@ -202,7 +220,7 @@ const tableColumns: Ref<PlusColumn[]> = computed(() => [
     }
   },
   {
-    label: transformI18n("menus.DatasourcePage"), // 适配国际化
+    label: "名称",
     prop: "name",
     minWidth: 100,
     tableColumnProps: {
@@ -229,7 +247,7 @@ const tableColumns: Ref<PlusColumn[]> = computed(() => [
   },
   {
     label: "HOST",
-    prop: "host",
+    prop: "dbHost",
     minWidth: 120,
     tableColumnProps: {
       align: "center",
@@ -318,7 +336,7 @@ const handleDialogFormConfirm = async (values: FieldValues) => {
       getTableDataList();
     }
   } else if (dialogFormOptCode.value === "edit") {
-    const { code, message } = await datasourceApi.modify(data.id, data);
+    const { code, message } = await datasourceApi.modify(data);
     if (code !== 200) {
       ElMessage.error("编辑失败!" + message);
     } else {
@@ -348,7 +366,7 @@ const dialogFormRules = {
       message: "请输入驱动类名"
     }
   ],
-  host: [
+  dbHost: [
     {
       required: true,
       message: "请输入HOST"
@@ -402,11 +420,22 @@ const dialogFormColumns: PlusColumn[] = [
   },
   {
     label: "驱动",
-    prop: "driverClassName"
+    prop: "driverClassName",
+    valueType: "select",
+    options: [
+      {
+        label: "com.mysql.cj.jdbc.Driver",
+        value: "com.mysql.cj.jdbc.Driver"
+      },
+      {
+        label: "org.postgresql.Driver",
+        value: "org.postgresql.Driver"
+      }
+    ]
   },
   {
     label: "HOST",
-    prop: "host",
+    prop: "dbHost",
     tooltip: "域名或ip"
   },
   {
@@ -424,7 +453,7 @@ const dialogFormColumns: PlusColumn[] = [
   },
   {
     label: "连接参数",
-    prop: "schemaName"
+    prop: "params"
   },
   {
     label: "用户名",
@@ -453,8 +482,18 @@ const detailDialogData = ref({});
 
 const getTableDataList = async () => {
   try {
-    const { data } = await datasourceApi.list(searchFormData.value);
-    tableData.value = data || [];
+    const { data } = await datasourceApi.list({
+      ...searchFormData.value,
+      _pageSize: pageInfo.value.pageSize,
+      _pageNum: pageInfo.value.page
+    });
+    console.log("getTableDataList", data);
+    tableData.value = data.records || [];
+    tableDataTotalRow.value = data.totalRow || 0;
+    pageInfo.value.page = data.pageNumber || 1;
+    pageInfo.value.pageSize = data.pageSize || 10;
+    console.log("pageInfo", pageInfo.value);
+    console.log("tableDataTotalRow", tableDataTotalRow.value);
   } catch (error) {
     console.log(error);
   }

@@ -75,6 +75,7 @@ menus:
   codeGenerator: Code Generator
   DatasourcePage: Datasource Page
   CodeTemplatePage: Template Page
+  TypeMappingPage: Type Mapping
 status:
   pureLoad: Loading...
   pureMessage: Message

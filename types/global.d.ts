@@ -196,4 +196,34 @@ declare global {
     data: T;
     message: string;
   }
+
+  interface Page<T = any> {
+    /**
+     * 当前页码
+     */
+    pageNumber: number;
+    /**
+     * 分页大小
+     */
+    pageSize: number;
+    /**
+     * 总页码
+     */
+    totalPage: number;
+    /**
+     * 总行数
+     */
+    totalRow: number;
+    /**
+     * 数据列表
+     */
+    records: T[];
+  }
+
+  /**
+   * 扩展 `Date`，实现在 utils/date.ts 文件中
+   */
+  interface Date {
+    format(pattern?: string): string;
+  }
 }

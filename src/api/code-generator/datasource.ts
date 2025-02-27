@@ -3,22 +3,34 @@ import { http } from "@/utils/http";
 /* prettier-ignore */
 
 export interface DatasourceInfo {
+  /** 主键 */
   id: number;
+  /** 数据源名称 */
   name: string;
+  /** 数据库类型 */
   dbType: string;
+  /** 驱动类名 */
   driverClassName: string;
-  host: string;
+  /** 数据库主机 */
+  dbHost: string;
+  /** 端口 */
   port: number;
+  /** 数据库名称 */
   databaseName: string;
+  /** 模式名称 */
   schemaName: string;
+  /** 参数 */
   params: string;
+  /** 用户名 */
   username: string;
+  /** 密码 */
   password: string;
+  /** 备注 */
   remark: string;
 }
 
 export const list = (params?: object) => {
-  return http.request<ApiResult<DatasourceInfo[]>>(
+  return http.request<ApiResult<Page<DatasourceInfo>>>(
     "get",
     "/api/v1/data-source-infos",
     {
@@ -39,10 +51,10 @@ export const save = (data: DatasourceInfo) => {
     { data }
   );
 };
-export const modify = (id: number | string, data: DatasourceInfo) => {
+export const modify = (data: DatasourceInfo) => {
   return http.request<ApiResult<DatasourceInfo>>(
     "put",
-    `/api/v1/data-source-infos/${id}`,
+    `/api/v1/data-source-infos`,
     { data }
   );
 };

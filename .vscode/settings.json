@@ -31,18 +31,11 @@
   "i18n-ally.keystyle": "nested",
   "i18n-ally.sortKeys": true,
   "i18n-ally.namespace": true,
-  "i18n-ally.enabledParsers": [
-    "yaml",
-    "js"
-  ],
+  "i18n-ally.enabledParsers": ["yaml", "js"],
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.displayLanguage": "zh-CN",
-  "i18n-ally.enabledFrameworks": [
-    "vue"
-  ],
-  "iconify.excludes": [
-    "el"
-  ],
+  "i18n-ally.enabledFrameworks": ["vue"],
+  "iconify.excludes": ["el"],
   "vscodeCustomCodeColor.highlightValue": [
     "v-loading",
     "v-auth",
@@ -52,5 +45,5 @@
     "v-perms",
     "v-ripple"
   ],
-  "vscodeCustomCodeColor.highlightValueColor": "#b392f0",
+  "vscodeCustomCodeColor.highlightValueColor": "#b392f0"
 }

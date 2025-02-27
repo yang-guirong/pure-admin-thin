@@ -9,8 +9,9 @@ import { createApp, type Directive } from "vue";
 import { useElementPlus } from "@/plugins/elementPlus";
 import { injectResponsiveStorage } from "@/utils/responsive";
 
-import Table from "@pureadmin/table";
+// import Table from "@pureadmin/table";
 import PureDescriptions from "@pureadmin/descriptions";
+import "@/utils/date";
 
 // 引入重置样式
 import "./style/reset.scss";
@@ -70,7 +71,7 @@ getPlatformConfig(app).then(async config => {
     .use(MotionPlugin)
     .use(useI18n)
     .use(useElementPlus)
-    .use(Table)
+    // .use(Table)
     .use(PureDescriptions)
     .use(PlusProComponents);
   // .use(useEcharts);

@@ -29,6 +29,16 @@ export default {
         title: $t("menus.CodeTemplatePage"),
         roles: ["admin"]
       }
+    },
+    {
+      path: "/code-generator/type-mapping/index",
+      name: "TypeMappingPage",
+      component: () => import("@/views/code-generator/type-mapping/index.vue"),
+      meta: {
+        icon: "ri:code-box-line",
+        title: $t("menus.TypeMappingPage"),
+        roles: ["admin"]
+      }
     }
   ]
 } satisfies RouteConfigsTable;
