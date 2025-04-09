@@ -21,6 +21,7 @@ import {
   VueUseComponentsResolver
 } from "unplugin-vue-components/resolvers";
 import { PlusProComponentsResolver } from "@plus-pro-components/resolver";
+import vueDevTools from "vite-plugin-vue-devtools";
 
 export function getPluginsList(
   VITE_CDN: boolean,
@@ -99,6 +100,8 @@ export function getPluginsList(
     // 打包分析
     lifecycle === "report"
       ? visualizer({ open: true, brotliSize: true, filename: "report.html" })
-      : (null as any)
+      : (null as any),
+    // 开发工具
+    vueDevTools()
   ];
 }

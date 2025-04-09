@@ -89,12 +89,7 @@ import {
   useTable
 } from "plus-pro-components";
 import { TabPaneName, TabsPaneContext } from "element-plus";
-import {
-  addDialog,
-  closeDialog,
-  updateDialog,
-  closeAllDialog
-} from "@/components/ReDialog";
+import { addDialog } from "@/components/ReDialog";
 
 defineOptions({
   name: "CodeTemplatePage"
@@ -384,7 +379,13 @@ const handleAddTemplate = () => {
     },
     {
       label: "模板内容",
-      prop: "content"
+      prop: "content",
+      valueType: "textarea",
+      fieldProps: {
+        maxlength: 10,
+        showWordLimit: true,
+        autosize: { minRows: 2, maxRows: 4 }
+      }
     },
     {
       label: "相对路径",
@@ -402,6 +403,8 @@ const handleAddTemplate = () => {
     contentRenderer: () => (
       <PlusForm
         v-model={formData}
+        rowProps={{ gutter: 20 }}
+        colProps={{ span: 12 }}
         columns={dialogFormColumns}
         rules={dialogFormRules}
         labelWidth="120px"

@@ -65,10 +65,18 @@ export const remove = (id: number) => {
   );
 };
 
+export const testConnection = (id: number) => {
+  return http.request<ApiResult<void>>(
+    "get",
+    `/api/v1/data-source-infos/${id}/test-connection`
+  );
+};
+
 export default {
   list,
   get,
   save,
   modify,
-  remove
+  remove,
+  testConnection
 };

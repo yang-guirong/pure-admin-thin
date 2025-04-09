@@ -18,7 +18,7 @@ const { device } = useNav();
   <div class="search-footer text-[#333] dark:text-white">
     <span class="search-footer-item">
       <EnterOutlined class="icon" />
-      {{ t("buttons.pureConfirm") }}
+      {{ t("common.confirm") }}
     </span>
     <span class="search-footer-item">
       <IconifyIconOffline :icon="ArrowUpLine" class="icon" />
@@ -27,7 +27,7 @@ const { device } = useNav();
     </span>
     <span class="search-footer-item">
       <MdiKeyboardEsc class="icon" />
-      {{ t("buttons.pureClose") }}
+      {{ t("common.close") }}
     </span>
     <p v-if="device !== 'mobile' && total > 0" class="search-footer-total">
       {{ `${t("search.pureTotal")} ${total}` }}

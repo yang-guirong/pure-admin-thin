@@ -296,6 +296,10 @@
     "watchTriggerable": true,
     "watchWithFilter": true,
     "whenever": true,
-    "ElMessage": true
+    "ElMessage": true,
+    "onElementRemoval": true,
+    "useCountdown": true,
+    "usePreferredReducedTransparency": true,
+    "useSSRWidth": true
   }
 }

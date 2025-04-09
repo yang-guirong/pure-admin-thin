@@ -51,7 +51,7 @@ class PureHttp {
         "zh"
           ? "zh-CN"
           : "en-US";
-    },
+    } /* ,
     beforeResponseCallback: (response: PureHttpResponse) => {
       const { code, message } = response.data satisfies ApiResult<any>;
       if (code !== 200) {
@@ -63,7 +63,7 @@ class PureHttp {
         );
         ElMessage.error(message);
       }
-    }
+    } */
   };
 
   /** 保存当前`Axios`实例对象 */
@@ -189,6 +189,7 @@ class PureHttp {
           resolve(response);
         })
         .catch(error => {
+          ElMessage.error(error.message);
           reject(error);
         });
     });
