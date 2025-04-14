@@ -219,7 +219,7 @@ buttons.value = [
       type: "info"
     }),
     async onClick(params: ButtonsCallBackParams) {
-      const { code, message } = await datasourceApi.remove(params.row.id);
+      const { code, message } = await datasourceApi.testConnection(params.row.id);
       if (code !== 200) {
         ElMessage.error(
           transformI18n($t("buttons.custom.testConnectionFailed")) + message
@@ -253,6 +253,7 @@ const tableColumns: Ref<PlusColumn[]> = computed(() => [
   {
     label: transformI18n($t("entity.DataSourceInfo.dbType")),
     prop: "dbType",
+    minWidth: 100,
     tableColumnProps: {
       align: "center",
       showOverflowTooltip: true
@@ -261,7 +262,7 @@ const tableColumns: Ref<PlusColumn[]> = computed(() => [
   {
     label: transformI18n($t("entity.DataSourceInfo.driverClassName")),
     prop: "driverClassName",
-    minWidth: 200,
+    minWidth: 120,
     tableColumnProps: {
       align: "center",
       showOverflowTooltip: true
@@ -287,7 +288,7 @@ const tableColumns: Ref<PlusColumn[]> = computed(() => [
   {
     label: transformI18n($t("entity.DataSourceInfo.databaseName")),
     prop: "databaseName",
-    minWidth: 120,
+    minWidth: 100,
     tableColumnProps: {
       align: "center",
       showOverflowTooltip: true
@@ -296,6 +297,7 @@ const tableColumns: Ref<PlusColumn[]> = computed(() => [
   {
     label: transformI18n($t("entity.DataSourceInfo.schemaName")),
     prop: "schemaName",
+    minWidth: 100,
     tableColumnProps: {
       align: "center",
       showOverflowTooltip: true
@@ -304,6 +306,7 @@ const tableColumns: Ref<PlusColumn[]> = computed(() => [
   {
     label: transformI18n($t("entity.DataSourceInfo.params")),
     prop: "params",
+    minWidth: 110,
     tableColumnProps: {
       align: "center",
       showOverflowTooltip: true
@@ -312,6 +315,7 @@ const tableColumns: Ref<PlusColumn[]> = computed(() => [
   {
     label: transformI18n($t("entity.DataSourceInfo.username")),
     prop: "username",
+    minWidth: 100,
     tableColumnProps: {
       align: "center",
       showOverflowTooltip: true
