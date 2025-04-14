@@ -132,6 +132,7 @@
     "vite-plugin-remove-console": "^2.2.0",
     "vite-plugin-router-warn": "^1.0.0",
     "vite-plugin-vue-devtools": "^7.7.2",
+    "vite-plugin-monaco-editor-esm": "^2.0.2",
     "vite-svg-loader": "^5.1.0",
     "vue-eslint-parser": "^9.4.3",
     "vue-tsc": "^2.1.10"

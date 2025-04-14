@@ -20,6 +20,7 @@ import {
 } from "unplugin-vue-components/resolvers";
 import { PlusProComponentsResolver } from "@plus-pro-components/resolver";
 import vueDevTools from "vite-plugin-vue-devtools";
+import monacoEditorEsmPlugin from "vite-plugin-monaco-editor-esm";
 
 export function getPluginsList(
   VITE_CDN: boolean,
@@ -90,6 +91,7 @@ export function getPluginsList(
       ? visualizer({ open: true, brotliSize: true, filename: "report.html" })
       : (null as any),
     // 开发工具
-    vueDevTools()
+    vueDevTools(),
+    monacoEditorEsmPlugin()
   ];
 }

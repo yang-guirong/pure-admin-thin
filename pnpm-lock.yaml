@@ -246,6 +246,9 @@ importers:
       vite-plugin-fake-server:
         specifier: ^2.1.4
         version: 2.2.0
+      vite-plugin-monaco-editor-esm:
+        specifier: ^2.0.2
+        version: 2.0.2(monaco-editor@0.52.2)
       vite-plugin-remove-console:
         specifier: ^2.2.0
         version: 2.2.0
@@ -3881,6 +3884,11 @@ packages:
     peerDependenciesMeta:
       '@nuxt/kit':
         optional: true
+
+  vite-plugin-monaco-editor-esm@2.0.2:
+    resolution: {integrity: sha512-XVkOpL/r0rw1NpbO30vUwG4S0THkC9KB1vjjV8olGd49h4/EQsKl3DrxB6KRDwyZNC9mKiiZgk2L6njUYj3oKQ==}
+    peerDependencies:
+      monaco-editor: '>=0.33.0'
 
   vite-plugin-remove-console@2.2.0:
     resolution: {integrity: sha512-qgjh5pz75MdE9Kzs8J0kBwaCfifHV0ezRbB9rpGsIOxam+ilcGV7WOk91vFJXquzRmiKrFh3Hxlh0JJWAmXTbQ==}
@@ -7857,6 +7865,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
       - supports-color
+
+  vite-plugin-monaco-editor-esm@2.0.2(monaco-editor@0.52.2):
+    dependencies:
+      monaco-editor: 0.52.2
 
   vite-plugin-remove-console@2.2.0: {}
 
